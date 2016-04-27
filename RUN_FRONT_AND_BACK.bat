@@ -1,3 +1,3 @@
-start python Kod/application/run.py
-cd Kod/application/frontend
+start python application/run.py
+cd application/frontend
 grunt connect

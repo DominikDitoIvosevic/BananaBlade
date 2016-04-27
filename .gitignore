@@ -70,6 +70,3 @@ frontend/src/**/*.css
 *.lock
 *.~lock.*
 *.tmp.txt
-Kod/application/radio.db
-radio.db
-Kod/application/radio.db

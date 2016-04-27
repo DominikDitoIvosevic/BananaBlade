@@ -1,3 +1,3 @@
-cd Kod/application/frontend
+cd application/frontend
 grunt
 cd ../../..

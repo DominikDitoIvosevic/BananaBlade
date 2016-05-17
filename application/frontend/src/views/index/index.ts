@@ -4,7 +4,6 @@ import { COMMON_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, ControlGroup, Validato
 
 import { HttpAdvanced, AuthService } from '../../services/services';
 
-import { Messages } from '../../components/messages/messages';
 import { Player } from '../../components/player/player';
 import { Popular } from '../../components/popular/popular';
 import { RadioDescr } from '../../components/radioDescr/radioDescr';
@@ -13,21 +12,13 @@ import { Station } from '../../components/station/station';
 
 @Component({
     selector: 'Index',
-    directives: [ Messages, Player, Popular, RadioDescr, Schedule, Station ],
+    directives: [ Player, Popular, RadioDescr, Schedule, Station ],
     templateUrl: './dist/views/index/index.html'
 })
 export class Index {
     http: HttpAdvanced;
     registerForm: ControlGroup;
     authService: AuthService;
-
-    first_name: Control;
-    last_name: Control;
-    email: Control;
-    password: Control;
-    password2: Control;
-    year_of_birth: Control;
-    occupation: Control;
 
     onSubmitRegistration(values: String): void {
         this.http.post('/user/auth/register', values);
@@ -37,22 +28,14 @@ export class Index {
         this.http = http;
         this.authService = authService;
 
-        this.first_name = new Control('', Validators.required);
-        this.last_name = new Control('', Validators.required);
-        this.email = new Control('', Validators.required);
-        this.password = new Control('', Validators.required);
-        this.password2 = new Control('', Validators.required);
-        this.year_of_birth = new Control('', Validators.required);
-        this.occupation = new Control('', Validators.required);
-
         this.registerForm = fb.group({
-            'first_name': this.first_name,
-            'last_name': this.last_name,
-            'email': this.email,
-            'password': this.password,
-            'password2': this.password2,
-            'year_of_birth': this.year_of_birth,
-            'occupation': this.occupation
+            'first_name': new Control('', Validators.required),
+            'last_name': new Control('', Validators.required),
+            'email': new Control('', Validators.required),
+            'password': new Control('', Validators.required),
+            'password2': new Control('', Validators.required),
+            'year_of_birth': new Control('', Validators.required),
+            'occupation': new Control('', Validators.required)
         });
     }
 

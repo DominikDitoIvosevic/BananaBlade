@@ -1,3 +1,5 @@
+///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
+
 import { Component } from "angular2/core";
 import { COMMON_DIRECTIVES } from "angular2/common";
 import { Http } from "angular2/http";
@@ -24,10 +26,12 @@ import { MsgService } from './services/services';
 export class App {
     router: Router;
     location: Location;
+    xcd: string = "ASsD";
+    qwe: string;
 
     constructor(router: Router, location: Location) {
         this.router = router;
-
+        this.location = location;
         // SOME OTHER DAY. Trying to fix not loading of lazy nested routes.
         // let currPath = location.path();
         // console.log(currPath);
@@ -40,4 +44,8 @@ export class App {
         //     router.renavigate().then(() => console.log('rena'));
         //}
     };
+
+    doStuff(a: string) {
+      this.qwe = "asds";
+    }
 }

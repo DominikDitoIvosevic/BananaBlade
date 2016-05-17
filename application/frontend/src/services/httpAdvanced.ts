@@ -1,3 +1,5 @@
+///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
+
 import { Injectable } from 'angular2/core';
 import { Http } from 'angular2/http';
 
@@ -21,6 +23,7 @@ export class HttpAdvanced {
     }
 
     private processUrl(oldUrl: string): string {
+        if (oldUrl && oldUrl[0] !== '/') oldUrl = '/' + oldUrl;
         return "http://localhost:8000" + oldUrl;
     }
 

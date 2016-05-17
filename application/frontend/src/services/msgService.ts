@@ -1,4 +1,7 @@
+///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
+
 import { Injectable, Inject } from 'angular2/core';
+import { Subject } from 'rxjs/Rx';
 
 let MESSAGE_TEXT = "message_text";
 let MESSAGE_TYPE = "message_type";
@@ -7,50 +10,28 @@ let INFO = "info";
 let SUCCESS = "success";
 let ERROR = "error";
 
-let THIS: MsgService = null;
+export class Message {
+  text: string;
+  type: string;
 
-@Injectable()
-export class MsgServiceInternal {
-    message: string = "";
-
-    constructor() {
-        // FOR TESTING
-        //setTimeout(() => this.setMessage("ASD"), 1000);
-    }
-
-    hasMessage() {
-        let msg = this.getMessage();
-        return !!msg.text;
-    }
-
-    setMessage(msg: any, type?: string) {
-        let msg2 = typeof msg === "string" ? msg : JSON.stringify(msg);
-        if ( !type ) type = INFO;
-        sessionStorage.setItem(MESSAGE_TEXT, msg2);
-        sessionStorage.setItem(MESSAGE_TYPE, type);
-    }
-
-    deleteMessage() {
-        this.setMessage("");
-    }
-
-    getMessage() {
-        let msg = sessionStorage.getItem(MESSAGE_TEXT);
-        let type = sessionStorage.getItem(MESSAGE_TYPE);
-        return { text: msg, type: type };
-    }
+  constructor(msg: any, type?: string) {
+    this.text = typeof msg === "string" ? msg : JSON.stringify(msg);
+    if ( !type ) this.type = INFO;
+  }
 }
 
 @Injectable()
 export class MsgService {
-    msgServiceInternal: MsgServiceInternal;
+    public message: Subject<Message>;
 
-    constructor( @Inject(MsgServiceInternal) msgServiceInternal: MsgServiceInternal) {
-        this.msgServiceInternal = msgServiceInternal;
-        THIS = this;
+    constructor() {
+      this.message = new Subject();
+        // FOR TESTING
+        //setTimeout(() => this.setMessage("ASD"), 1000);
     }
 
-    setMessage(msg: string, type?: string) {
-        this.msgServiceInternal.setMessage(msg, type);
+    setMessage(msg: any, type?: string) {
+      let newMsg = new Message(msg, type);
+      this.message.next(newMsg);
     }
 }

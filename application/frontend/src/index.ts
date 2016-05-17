@@ -1,4 +1,4 @@
-// ///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
+///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
 
 import { FORM_PROVIDERS, FormBuilder } from 'angular2/common';
 import { ROUTER_PROVIDERS, Location, LocationStrategy, PathLocationStrategy } from 'angular2/router';
@@ -8,7 +8,7 @@ import { provide, Injectable } from 'angular2/core';
 
 import { App } from './app';
 
-import { AuthService, MsgService, HttpAdvanced, FormBuilderAdvanced, MsgServiceInternal } from './services/services';
+import { AuthService, MsgService, HttpAdvanced, FormBuilderAdvanced } from './services/services';
 
 @Injectable()
 export class DefaultRequestOptions extends BaseRequestOptions {
@@ -17,6 +17,8 @@ export class DefaultRequestOptions extends BaseRequestOptions {
         this.headers.set("Content-Type", "application/x-www-form-urlencoded");
     }
 }
+
+let a = 123;
 
 bootstrap(
     App,
@@ -27,7 +29,6 @@ bootstrap(
         provide(LocationStrategy, { useClass: PathLocationStrategy }),
         provide(RequestOptions, { useClass: DefaultRequestOptions }),
         MsgService,
-        MsgServiceInternal,
         HttpAdvanced,
         AuthService,
         FormBuilderAdvanced

@@ -1,3 +1,4 @@
-start python application/run.py
-cd application/frontend
+cd application
+start python run.py
+cd frontend
 grunt connect

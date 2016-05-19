@@ -21,7 +21,7 @@ export class HeaderBar {
         this.http = http;
         this.authService = authService;
 
-        this.authService.updateLoginStatus();
+        this.authService.updateUserData();
 
         let loginEntities = ['email', 'password'];
         this.loginForm = fb.create(loginEntities, '/user/auth/login');

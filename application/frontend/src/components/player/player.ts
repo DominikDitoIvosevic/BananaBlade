@@ -45,17 +45,17 @@ export class Player{
         this.http = http;
         this.track = new Track( -1, 'Nepostojeći zapis', 'n/a', 'n/a', 'n/a', 0, 0, 0, 'n/a' );
 
-        setTimeout( () => {
-            this.audio = document.getElementById( 'audio-player' );
-            this.playing = false;
-            if ( this.audio ) {
-                this.audio.src = this.sourceUrl;
-                this.audio.volume = 0.6;
-                this.playing = false;
-                this.loadTrackData();
-                this.calcProgress();
-            }
-        }, 1000 );
+        // setTimeout( () => {
+        //     this.audio = document.getElementById( 'audio-player' );
+        //     this.playing = false;
+        //     if ( this.audio ) {
+        //         this.audio.src = this.sourceUrl;
+        //         this.audio.volume = 0.6;
+        //         this.playing = false;
+        //         this.loadTrackData();
+        //         this.calcProgress();
+        //     }
+        // }, 1000 );
     }
 
     calcProgress(){
@@ -70,15 +70,15 @@ export class Player{
     }
 
     play(){
-        this.audio.load();
-        this.audio.onloadedmetadata = () => {
-            this.http.getNoError( '/player/location', (res) => {
-                this.track.play_location = res.play_location;
-                this.audio.currentTime = this.track.play_location;
-                this.audio.play();
-                this.playing = true;
-            });
-        }
+        // this.audio.load();
+        // this.audio.onloadedmetadata = () => {
+        //     this.http.getNoError( '/player/location', (res) => {
+        //         this.track.play_location = res.play_location;
+        //         this.audio.currentTime = this.track.play_location;
+        //         this.audio.play();
+        //         this.playing = true;
+        //     });
+        // }
     }
 
     // loadTrack( self? : any ){
@@ -126,19 +126,19 @@ export class Player{
     }
 
     loadTrackData(){
-        this.http.getNoError('/player/info', ( res ) => {
-            this.track = new Track( res.id, res.title, res.artist, res.album, res.genre, res.year, res.play_duration, res.play_location, res.editor );
-
-            this.http.getNoError( '/player/location', ( res ) => {
-                this.track.play_location = res.play_location;
-                console.log( 'Reload' );
-                console.log( this.playing );
-                if ( this.playing ){
-                    this.play();
-                }
-            });
-
-            setTimeout( () => this.loadTrackData(), this.calcDelta() );
-        });
+        // this.http.getNoError('/player/info', ( res ) => {
+        //     this.track = new Track( res.id, res.title, res.artist, res.album, res.genre, res.year, res.play_duration, res.play_location, res.editor );
+        // 
+        //     this.http.getNoError( '/player/location', ( res ) => {
+        //         this.track.play_location = res.play_location;
+        //         console.log( 'Reload' );
+        //         console.log( this.playing );
+        //         if ( this.playing ){
+        //             this.play();
+        //         }
+        //     });
+        // 
+        //     setTimeout( () => this.loadTrackData(), this.calcDelta() );
+        // });
     }
 }

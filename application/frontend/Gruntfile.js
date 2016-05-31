@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       default: {
         src: [ "src/**/*.ts" ],
         options: {
-          fast: 'never',
+          // fast: 'never',
           module: 'commonjs',
           target: 'es5',
           emitDecoratorMetadata: true,

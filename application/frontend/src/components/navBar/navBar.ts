@@ -22,11 +22,10 @@ export class NavBar {
     }
 
     isVisible( at : number ){
-        return ( ( 1 << parseInt(this.authService.getAuthLevel()) ) & at ) != 0;
+        return ( ( 1 << parseInt(this.authService.authLevel) ) & at ) != 0;
     }
 
     logout() {
-
-        this.authService.logout(() => this.router.navigate(['/Index']));
+        this.authService.logout().subscribe(() => this.router.navigate(['/Index']));
     }
 }

@@ -10,14 +10,14 @@ header.header-bar.row
     button.dim(type='button' '(click)'="authService.loginUser()") User
   .user-box 
     //| {{authService.isLoggedInFn()}} {{authService.isLoggedIn}}
-    .user-form-box( '*ngIf'="!authService.isLoggedInFn()" )
+    .user-form-box( '*ngIf'="!authService.isLoggedIn" )
       form('[ngFormModel]'="loginForm.group" '(ngSubmit)'="onSubmit(loginForm.group.value)")
         input(type='email', id='email', placeholder='E-mail' '[ngFormControl]'="loginForm.controls['email']" )
         input(type='password', id='password', placeholder='Lozinka' '[ngFormControl]'="loginForm.controls['password']" )
         button(type='submit') Prijavi se
         a( href = "#register" )
           button.dim(type='button') Registriraj se
-    .user-name-box( '*ngIf'="authService.isLoggedInFn()" )
+    .user-name-box( '*ngIf'="authService.isLoggedIn" )
       a( '[routerLink]' = "['/Settings', 'Overview']" )
         i.material-icons.user-icon settings
       span.user-name {{authService.userName}}

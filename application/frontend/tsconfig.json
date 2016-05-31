@@ -12,8 +12,58 @@
     "rootDir": "src/",
     "outDir": "dist/"
   },
-  "exclude": [
-    "node_modules",
-    "node_modules/"
-  ]
+  "filesGlob": [
+    "src/**/*.ts"
+  ],
+  "files": [
+    "src/app.ts",
+    "src/components/headerBar/headerBar.ts",
+    "src/components/messages/messages.ts",
+    "src/components/navBar/navBar.ts",
+    "src/components/player/player.ts",
+    "src/components/popular/popular.ts",
+    "src/components/radioDescr/radioDescr.ts",
+    "src/components/schedule/schedule.ts",
+    "src/components/station/station.ts",
+    "src/components/stats/adminsList/adminsList.ts",
+    "src/components/stats/globalWishlist/globalWishlist.ts",
+    "src/components/stats/popularTrack/popularTrack.ts",
+    "src/components/stats/usersCount/usersCount.ts",
+    "src/index.ts",
+    "src/services/authService.ts",
+    "src/services/form.ts",
+    "src/services/httpAdvanced.ts",
+    "src/services/msgService.ts",
+    "src/services/ng2-file-upload2/components/file-upload/file-drop.ts",
+    "src/services/ng2-file-upload2/components/file-upload/file-item.ts",
+    "src/services/ng2-file-upload2/components/file-upload/file-like-object.ts",
+    "src/services/ng2-file-upload2/components/file-upload/file-select.ts",
+    "src/services/ng2-file-upload2/components/file-upload/file-uploader.ts",
+    "src/services/ng2-file-upload2/ng2-file-upload.ts",
+    "src/services/routingProvider.ts",
+    "src/services/services.ts",
+    "src/services/utilities.ts",
+    "src/settings.ts",
+    "src/views/accountData/accountData.ts",
+    "src/views/accountDelete/accountDelete.ts",
+    "src/views/accountPassword/accountPassword.ts",
+    "src/views/addTrack/addTrack.ts",
+    "src/views/editorSlots/editorSlots.ts",
+    "src/views/editTrack/editTrack.ts",
+    "src/views/editUser/editUser.ts",
+    "src/views/index/index.ts",
+    "src/views/makePlaylist/makePlaylist.ts",
+    "src/views/makeWishlist/makeWishlist.ts",
+    "src/views/manageAdmins/manageAdmins.ts",
+    "src/views/manageEditors/manageEditors.ts",
+    "src/views/manageRadiostation/manageRadiostation.ts",
+    "src/views/manageRequests/manageRequests.ts",
+    "src/views/manageTracks/manageTracks.ts",
+    "src/views/manageUsers/manageUsers.ts",
+    "src/views/overview/overview.ts",
+    "src/views/showStats/showStats.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
-import { MsgService, Message } from '../../services/services';
+import { MsgService, Message, MsgType } from '../../services/services';
 import { Observable, Subscriber } from 'rxjs/Rx';
 
 @Component({
@@ -9,7 +9,7 @@ import { Observable, Subscriber } from 'rxjs/Rx';
   templateUrl : 'dist/components/messages/messages.html'
 })
 export class Messages{
-  messageType : string;
+  messageType : MsgType;
   messageText : string;
   shown : boolean = false;
   listenTimeoutInterval: number;

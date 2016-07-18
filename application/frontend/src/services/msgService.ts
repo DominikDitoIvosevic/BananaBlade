@@ -10,13 +10,20 @@ let INFO = "info";
 let SUCCESS = "success";
 let ERROR = "error";
 
+export enum MsgType {
+  Info,
+  Success,
+  Error
+}
+
 export class Message {
   text: string;
-  type: string;
+  type: MsgType;
 
-  constructor(msg: any, type?: string) {
-    this.text = typeof msg === "string" ? msg : JSON.stringify(msg);
-    if ( !type ) this.type = INFO;
+  constructor(text: string, type?: MsgType) {
+    this.text = text;
+    if ( !type ) this.type = MsgType.Info;
+    else this.type = type;
   }
 }
 
@@ -30,8 +37,8 @@ export class MsgService {
         //setTimeout(() => this.setMessage("ASD"), 1000);
     }
 
-    setMessage(msg: any, type?: string) {
-      let newMsg = new Message(msg, type);
+    setMessage(text: string, type?: MsgType) {
+      let newMsg = new Message(text, type);
       this.message.next(newMsg);
     }
 }

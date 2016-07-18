@@ -33,6 +33,7 @@
     "src/services/authService.ts",
     "src/services/form.ts",
     "src/services/httpAdvanced.ts",
+    "src/services/httpWithNotif.ts",
     "src/services/msgService.ts",
     "src/services/ng2-file-upload2/components/file-upload/file-drop.ts",
     "src/services/ng2-file-upload2/components/file-upload/file-item.ts",

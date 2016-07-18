@@ -3,7 +3,7 @@ import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import {Location, RouteConfig, RouterLink, Router, CanActivate, RouteParams} from 'angular2/router';
 
-import { HttpAdvanced, MsgService } from '../../services/services';
+import { HttpAdvanced, MsgService, MsgType } from '../../services/services';
 
 @Component({
   selector: 'MakePlaylist',
@@ -96,14 +96,14 @@ export class MakePlaylist {
     addTrackToPlaylist(track) {
         var totalTime = this.getTotalTime()
         if ( totalTime > 60*60 ){
-            this.msgService.setMessage( 'Nije moguće dodati novi zapis - već je prekoračeno dozvoljeno vrijeme trajanja liste za reprodukciju.', 'error' );
+            this.msgService.setMessage( 'Nije moguće dodati novi zapis - već je prekoračeno dozvoljeno vrijeme trajanja liste za reprodukciju.', MsgType.Error );
             this.trackSearch = '';
             this.searchResults = [];
             return;
         }
         var delta = 60*60 - totalTime - track.duration;
         if ( delta > 0 && delta < 15 ){
-            this.msgService.setMessage( 'Dodani zapis reproducirao bi se kraće od 15 sekundi, stoga ga nije moguće dodati.', 'error' );
+            this.msgService.setMessage( 'Dodani zapis reproducirao bi se kraće od 15 sekundi, stoga ga nije moguće dodati.', MsgType.Error );
             this.trackSearch = '';
             this.searchResults = [];
             return;
@@ -141,7 +141,7 @@ export class MakePlaylist {
         this.editable = false;
 
         if ( this.getTotalTime() < 60*60 ){
-            this.msgService.setMessage( 'Lista za reprodukciju nije dovoljno duga - treba trajati točno 1 sat.', 'error' );
+            this.msgService.setMessage( 'Lista za reprodukciju nije dovoljno duga - treba trajati točno 1 sat.', MsgType.Error );
             return;
         }
 

@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 import { COMMON_DIRECTIVES } from 'angular2/common';
 import { Location, RouteConfig, RouterLink, Router, CanActivate } from 'angular2/router';
 
-import { HttpAdvanced, MsgService } from '../../services/services';
+import { HttpAdvanced, MsgService, MsgType } from '../../services/services';
 
 @Component({
   selector: 'MakeWishlist',
@@ -45,12 +45,12 @@ export class MakeWishlist {
 
     addToWishlist( track : Track ){
         if ( this.tracks.length > 9 ){
-            this.msgService.setMessage( 'Na listi želja je već deset zapisa, nije moguće dodati još jedan.', 'error' );
+            this.msgService.setMessage( 'Na listi želja je već deset zapisa, nije moguće dodati još jedan.', MsgType.Error );
             return;
         }
         for ( let i in this.tracks )
             if ( this.tracks[ i ].id == track.id ){
-                this.msgService.setMessage( 'Taj je zapis već na listi želja.', 'error' );
+                this.msgService.setMessage( 'Taj je zapis već na listi želja.', MsgType.Error );
                 return;
             }
 
@@ -107,7 +107,7 @@ export class MakeWishlist {
 
     confirmWishlist(){
         this.http.postWithRes( '/user/wishlist/confirm', '', ( res ) => {
-            this.msgService.setMessage('Lista želja uspješno potvrđena', 'success');
+            this.msgService.setMessage('Lista želja uspješno potvrđena', MsgType.Success);
             this.loadData();
         })
     }

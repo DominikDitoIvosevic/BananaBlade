@@ -18,8 +18,6 @@ export class DefaultRequestOptions extends BaseRequestOptions {
     }
 }
 
-let a = 123;
-
 bootstrap(
     App,
     [

@@ -3,7 +3,7 @@ import { Component } from 'angular2/core';
 import { Location, RouteConfig, RouterLink, Router, CanActivate } from 'angular2/router';
 import { COMMON_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 
-import { Form, HttpAdvanced, MsgService } from '../../services/services';
+import { Form, HttpAdvanced, MsgService, MsgType } from '../../services/services';
 
 @Component({
     selector: 'ManageAdmins',
@@ -53,7 +53,7 @@ export class ManageAdmins {
     addAdmin() {
         if (this.closestMatches.length == 0) return;
         if ( this.admins.length > 9 ){
-            this.msgService.setMessage( 'U sustavu već postoji 10 administratora, nije moguće dodati još jednog.', 'error' );
+            this.msgService.setMessage( 'U sustavu već postoji 10 administratora, nije moguće dodati još jednog.', MsgType.Error );
             this.userSearch = "";
             this.closestMatches = new Array();
             return;

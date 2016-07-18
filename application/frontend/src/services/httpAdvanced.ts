@@ -3,11 +3,7 @@
 import { Injectable } from 'angular2/core';
 import { Http } from 'angular2/http';
 
-import { MsgService, urlEncode } from './services'
-
-let INFO = "info";
-let SUCCESS = "success";
-let ERROR = "error";
+import { MsgService, MsgType, urlEncode } from './services'
 
 let SELF: HttpAdvanced = null;
 
@@ -31,9 +27,7 @@ export class HttpAdvanced {
      * This is for plain ol' GET requests .. with callback of course.
      */
     public get(url, callback) {
-        console.log(url);
         url = this.processUrl(url);
-            console.log(url);
         return this.http.get(url).subscribe((res) => {
             let msg = this.extractMsg(res);
             callback(msg);
@@ -49,9 +43,7 @@ export class HttpAdvanced {
             let msg = this.extractMsg(res);
             callback(msg);
         }, (err) => {
-            console.log("err:");
             let msg = this.extractMsg(err);
-            console.log(msg);
         });
     }
 
@@ -64,7 +56,7 @@ export class HttpAdvanced {
         url = this.processUrl(url);
         return this.http.post(url, urlEncode(data)).subscribe((res) => {
             let msg = this.extractMsg(res);
-            this.msgService.setMessage(msg, SUCCESS);
+            this.msgService.setMessage(msg, MsgType.Success);
         }, this.httpErrorHandler);
     }
 
@@ -83,7 +75,7 @@ export class HttpAdvanced {
         url = this.processUrl(url);
         return this.http.post(url, urlEncode(data)).subscribe((res) => {
             let msg = this.extractMsg(res);
-            this.msgService.setMessage(msg, SUCCESS);
+            this.msgService.setMessage(msg, MsgType.Success);
             if (callback) callback(msg);
         }, this.httpErrorHandler);
     }
@@ -92,7 +84,7 @@ export class HttpAdvanced {
         url = this.processUrl(url);
         return this.http.post(url, data).subscribe((res) => {
             let msg = this.extractMsg(res);
-            this.msgService.setMessage(msg, SUCCESS);
+            this.msgService.setMessage(msg, MsgType.Success);
             if (callback) callback(res);
         }, this.httpErrorHandler);
     }
@@ -104,13 +96,13 @@ export class HttpAdvanced {
 
     private httpErrorHandler(err) {
         let msg = SELF.extractMsg(err);
-        SELF.msgService.setMessage(msg, ERROR);
+        SELF.msgService.setMessage(msg, MsgType.Error);
         return msg;
     }
 
     private httpSuccessHandler(success) {
         let msg = SELF.extractMsg(success);
-        SELF.msgService.setMessage(msg, SUCCESS);
+        SELF.msgService.setMessage(msg, MsgType.Success);
         return msg;
     }
 }

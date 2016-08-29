@@ -2,20 +2,20 @@ import { Http, URLSearchParams } from 'angular2/http';
 import { FormBuilder, ControlGroup, Validators, Control } from 'angular2/common';
 import { Injectable } from 'angular2/core';
 
-import { HttpAdvanced } from './services';
+import { HttpWithNotif } from './services';
 
 interface Dict<T> {
     [K: string]: T;
 }
 
 export class Form {
-    http: HttpAdvanced;
+    http: HttpWithNotif;
 
     submissionUrl: string;
     group: ControlGroup;
     controls: Dict<Control>;
 
-    constructor(fb: FormBuilder, http: HttpAdvanced, controlNames: string[], submissionUrl: string, getter?: any) {
+    constructor(fb: FormBuilder, http: HttpWithNotif, controlNames: string[], submissionUrl: string, getter?: any) {
         this.http = http;
         this.submissionUrl = submissionUrl;
 
@@ -33,7 +33,7 @@ export class Form {
         if (getter) {
             // If getter is a string then it's meant to fetch the values via http GET
             if (typeof getter === "string") {
-                this.http.get(getter, (data) => {
+                this.http.get(getter).subscribe((data) => {
                     console.log(data);
                     for (let name in data) {
                         this.controls[name].updateValue(data[name]);
@@ -61,10 +61,10 @@ export class Form {
 
 @Injectable()
 export class FormBuilderAdvanced {
-    http: HttpAdvanced;
+    http: HttpWithNotif;
     fb: FormBuilder;
 
-    constructor(fb: FormBuilder, http: HttpAdvanced) {
+    constructor(fb: FormBuilder, http: HttpWithNotif) {
         this.fb = fb;
         this.http = http;
     }

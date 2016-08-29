@@ -8,13 +8,14 @@ import { provide, Injectable } from 'angular2/core';
 
 import { App } from './app';
 
-import { AuthService, MsgService, HttpAdvanced, FormBuilderAdvanced } from './services/services';
+import { AuthService, MsgService, HttpAdvanced, FormBuilderAdvanced, HttpWithNotif } from './services/services';
 
 @Injectable()
 export class DefaultRequestOptions extends BaseRequestOptions {
     constructor() {
         super();
         this.headers.set("Content-Type", "application/x-www-form-urlencoded");
+        this.headers.set("Access-Control-Allow-Origin", "*");
     }
 }
 
@@ -27,6 +28,7 @@ bootstrap(
         provide(LocationStrategy, { useClass: PathLocationStrategy }),
         provide(RequestOptions, { useClass: DefaultRequestOptions }),
         MsgService,
+        HttpWithNotif,
         HttpAdvanced,
         AuthService,
         FormBuilderAdvanced

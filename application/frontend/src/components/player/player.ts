@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { COMMON_DIRECTIVES, NgIf } from 'angular2/common';
 
-import { HttpAdvanced } from './../../services/services';
+import { HttpWithNotif } from './../../services/services';
 
 class Track{
     id: number;
@@ -34,14 +34,14 @@ class Track{
 })
 export class Player{
     track: Track;
-    http: HttpAdvanced;
+    http: HttpWithNotif;
     sourceUrl: string = '/player/get';
     audio: any = { currentTime : 0, duration : 100 };
     playing: boolean;
     timeout: any;
     progress: number = 0;
 
-    constructor( http: HttpAdvanced ){
+    constructor( http: HttpWithNotif ){
         this.http = http;
         this.track = new Track( -1, 'Nepostojeći zapis', 'n/a', 'n/a', 'n/a', 0, 0, 0, 'n/a' );
 

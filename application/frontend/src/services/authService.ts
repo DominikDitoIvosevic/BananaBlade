@@ -1,8 +1,7 @@
 import { Injectable, Injector, Inject, provide } from 'angular2/core';
 import { Observable, Subscription } from 'rxjs/Rx';
-import { Http } from 'angular2/http';
 
-import { HttpAdvanced, urlEncode } from './../services/services';
+import { HttpWithNotif } from './../services/services';
 
 let ACCOUNT_TYPE: string = "accountType";
 
@@ -14,7 +13,7 @@ let OWNER = '4';
 
 @Injectable()
 export class AuthService {
-  private http: Http;
+  private http: HttpWithNotif;
   public isLoggedIn: boolean = false;
   public userRole: string = "";
   public userName: string = "";
@@ -22,13 +21,13 @@ export class AuthService {
 
   public accountType: number = 0;
 
-  constructor(http: Http) {
-    this.http = http;
+  constructor(httpWithNotif: HttpWithNotif) {
+    this.http = httpWithNotif;
     this.updateUserData();
   }
 
   updateUserAuth(): Observable<any> {
-    let getType = this.http.get("http://localhost:8000" + '/user/account/type').map((res) => res.json().data);
+    let getType = this.http.get<any>('/user/account/type');
 
     return getType.map((res) => {
       if (res.account_type && res.account_type > 0) {
@@ -59,10 +58,10 @@ export class AuthService {
     return this.authLevel == OWNER;
   }
 
-  updateUserData(): Subscription {
-    return this.updateUserAuth().subscribe(() => {
+  updateUserData() {
+    this.updateUserAuth().subscribe(() => {
       if (this.isLoggedIn) {
-        this.http.get("http://localhost:8000" + '/user/account/get').map((res) => res.json().data).subscribe((data) => {
+        this.http.get<any>('/user/account/get').subscribe((data) => {
           this.userName = data.first_name + ' ' + data.last_name;
           let role = data.account_type;
           this.accountType = role;
@@ -76,21 +75,20 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    let _logout = this.http.get("http://localhost:8000" + '/user/auth/signout');
 
     if (this.isLoggedIn) {
-      return _logout.flatMap(() => this.updateUserAuth());
+      let _logout = this.http.get('/user/auth/signout');
+      return _logout.concat(this.updateUserAuth());
     }
     else {
       return Observable.empty();
     }
   }
 
-  loginX(mail: string, password: string) {
-    var _login = this.http.post("http://localhost:8000" + '/user/auth/login', urlEncode({ email: mail, password: password }));
+  loginX(email: string, password: string) {
+    var _login = this.http.post<any>('/user/auth/login', { email: email, password: password });
 
-    this.logout().flatMap(() => _login)
-      .subscribe(() => this.updateUserData());
+    _login.subscribe(() => this.updateUserData());
   }
 
   loginAdmin() {

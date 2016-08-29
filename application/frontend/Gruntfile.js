@@ -46,13 +46,27 @@ module.exports = function (grunt) {
           comments: false,
           additionalFlags: ' --outDir ./dist'
         }
-      }
+      },
+      slow: {
+        src: [ "src/**/*.ts" ],
+        options: {
+          fast: 'never',
+          module: 'commonjs',
+          target: 'es5',
+          emitDecoratorMetadata: true,
+          experimentalDecorators: true,
+          failOnTypeErrors : false,
+          sourceMap: false,
+          comments: false,
+          additionalFlags: ' --outDir ./dist'
+        }
+      },
     },
     watch: {
-      jade:   { files: [ 'src/**/*.jade'  ], tasks: 'jade'  },
-      css:    { files: [ 'src/**/*.sass'  ], tasks: 'css'   },
-      sass:   { files: [ 'src/**/*.sass'  ], tasks: 'sass'  },
-      ts:     { files: [ 'src/**/*.ts'    ], tasks: 'ts'    }
+      jade:   { files: [ 'src/**/*.jade'  ], tasks: 'jade'          },
+      css:    { files: [ 'src/**/*.sass'  ], tasks: 'css'           },
+      sass:   { files: [ 'src/**/*.sass'  ], tasks: 'sass'          },
+      ts:     { files: [ 'src/**/*.ts'    ], tasks: 'ts:default'    }
     },
     clean:  { default: [ 'dest' ] },
     copy:   { default: { files: [ { expand: true, cwd: 'app/typescript/', src: './**', dest: 'app/templates'} ] } },
@@ -62,7 +76,7 @@ module.exports = function (grunt) {
         options: { logConcurrentOutput: true }
       },
       compile: {
-        tasks: [ 'jade', 'sass', 'ts' ],
+        tasks: [ 'jade', 'sass', 'ts:default' ],
         options: { logConcurrentOutput: true }
       }
     },

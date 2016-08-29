@@ -136,6 +136,7 @@ def process_login():
     password        = request.values.get( 'password' )
 
     try:
+        session.clear()
         EmailValidator().validate( email )
         validate_password( password )
         user = User.authenticate_user( email, password )

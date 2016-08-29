@@ -2,7 +2,7 @@ import { Component, Input } from 'angular2/core';
 import { FORM_DIRECTIVES, COMMON_DIRECTIVES, ControlGroup, Validators, Control } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
 
-import { AuthService, Form, FormBuilderAdvanced, HttpAdvanced } from '../../services/services';
+import { AuthService, Form, FormBuilderAdvanced } from '../../services/services';
 
 @Component({
     selector: 'header-bar',
@@ -11,14 +11,12 @@ import { AuthService, Form, FormBuilderAdvanced, HttpAdvanced } from '../../serv
 })
 export class HeaderBar {
     loginForm: Form;
-    http: HttpAdvanced;
     authService: AuthService;
 
     userName: string;
     userRole: string;
 
-    constructor(fb: FormBuilderAdvanced, http: HttpAdvanced, authService: AuthService) {
-        this.http = http;
+    constructor(fb: FormBuilderAdvanced, authService: AuthService) {
         this.authService = authService;
 
         this.authService.updateUserData();
